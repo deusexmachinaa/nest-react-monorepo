@@ -5,11 +5,24 @@ import viteLogo from "/vite.svg";
 
 function App() {
   const [greeting, setGreeting] = useState("");
+  const [bye, setBye] = useState("");
+  const [json, setJson] = useState();
 
   useEffect(() => {
-    fetch("/api")
+    fetch("/api/hello")
       .then((res) => res.text())
       .then((text) => setGreeting(text));
+  }, [greeting]);
+
+  useEffect(() => {
+    fetch("/api/goodbye")
+      .then((res) => res.text())
+      .then((text) => setBye(text));
+  }, [bye]);
+
+  useEffect(() => {
+    fetch("/api/jsondata");
+    //todo: fix this
   }, []);
 
   return (
@@ -23,6 +36,7 @@ function App() {
         </a>
       </div>
       <h1>{greeting}</h1>
+      <h2>{bye}</h2>
     </>
   );
 }
